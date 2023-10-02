@@ -45,11 +45,9 @@ class eigfun1D():
         psi[1:-1] = eigV[:, n]
         rho = np.zeros(self.eignum)
         rho[1:-1] = eigV[:, n] * eigV[:, n]
+        
+        return eigE[n]
 
-        plt.plot(x, rho/(sum(rho)*dx),label=r'$E_{%s}=%.3f\hbar \omega$'%(n, eigE[n]))
-        plt.title(r'$E_{%s}=%.3f\hbar \omega$'%(n, eigE[n]))
-        plt.xlabel(r'$x$')
-        plt.pause(0.01)
 
     #shooting method
     def Shooting(self, method="positive"):
@@ -89,7 +87,7 @@ class eigfun1D():
                 else:
                     pass
                 flag = psi_p[-1]
-            return eigElist, psilist
+            return eigElist
 
         elif method == "negative":
             eigElist, psilist = [],[]
@@ -121,7 +119,7 @@ class eigfun1D():
                 else:
                     pass                
                 flag = psi_n[0]
-            return eigElist, psilist
+            return eigElist
 
         elif method == "medium":
             midpoint = np.random.random(3) * (self.xmax - self.xmin) + self.xmin
@@ -181,7 +179,7 @@ class eigfun1D():
                     else:
                         pass
                 flag = copy.deepcopy(newflag)
-            return eigElist, psilist
+            return eigElist
 
     
         
@@ -190,6 +188,6 @@ def potential(x, m=1, omega=1):
     return 0.5 * m * omega**2 * x**2
 
 a = eigfun1D(xmin=-A, xmax=A, potential = potential)
-##a.FDM(n = 10)
-eigElist, psilist = a.Shooting(method = "positive")
-print(eigElist)
+a.FDM(n = 10)
+##eigElist, psilist = a.Shooting(method = "positive")
+##print(eigElist)
