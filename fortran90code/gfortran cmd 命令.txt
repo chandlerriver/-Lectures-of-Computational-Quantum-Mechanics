@@ -1,0 +1,15 @@
+gfortran -c Comphy_Findroot.f90
+gfortran -c Main.f90
+gfortran Comphy_Findroot.o Main.o -o output
+
+
+gfortran指令大全：
+-c ：只编译源代码文件，不进行链接。
+-Ofast ：不严格遵循语言标准，启用所有的-O3优化选项以及部分优化选项。
+-O ：启用-O2优化选项。
+-g ：编译时启用调试信息。
+-i ：在执行前暂停，等待用户输入。
+-I ：添加头文件搜索路径。
+-L ：添加库文件搜索路径。
+-l ：链接指定的库文件。
+空  ：该命令没有指定链接选项
